@@ -7,3 +7,5 @@ Instructions:
 Clone this repository into ~/.local/share/plasma/wallpapers/ (The resulting path being: "~/.local/share/plasma/wallpapers/org.kde.video/...".)
 
 Now you just go into wallpaper or lock screen settings and chose "Video" instead of "Image".
+
+Feel free to use and add to this project!

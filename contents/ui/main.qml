@@ -9,6 +9,7 @@ Item {
         muted: wallpaper.configuration.Muted
         loops: MediaPlayer.Infinite
         source: wallpaper.configuration.Video
+        playbackRate: wallpaper.configuration.Rate
     }
 
     VideoOutput {

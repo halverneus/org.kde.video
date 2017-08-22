@@ -10,6 +10,7 @@ ColumnLayout {
     property string cfg_Video
     property string cfg_Folder
     property bool cfg_Muted
+    property double cfg_Rate
 
     GroupBox {
         title: "File picker"
@@ -54,6 +55,16 @@ ColumnLayout {
                         { cfg_Muted = true }
                     else
                         { cfg_Muted = false }
+            }
+        }
+    }
+
+    GroupBox {
+        title: "Playback Rate"
+        Slider {
+            value: wallpaper.configuration.Rate
+            onValueChanged: {
+                cfg_Rate = value
             }
         }
     }

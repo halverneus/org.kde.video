@@ -18,6 +18,10 @@
       <label>Audio muted</label>
       <default>false</default>
     </entry>
+    <entry name="Rate" type="Double">
+      <label>Platback Rate</label>
+    <default>1.0</default>
+    </entry>
   </group>
 
 </kcfg>

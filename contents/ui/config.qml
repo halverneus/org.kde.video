@@ -37,7 +37,7 @@ ColumnLayout {
     FileDialog {
         id: fileDialog
         title: "Pick a video file"
-        nameFilters: [ "Video files (*.mp4 *.mpg *.ogg *.mov *.webm *.flv *.matroska *.avi)", "All files (*)" ]
+        nameFilters: [ "Video files (*.mp4 *.mpg *.ogg *.mov *.webm *.flv *.matroska *.avi *.m3u)", "All files (*)" ]
         onAccepted: {
             cfg_Video = fileDialog.fileUrls[0]
             cfg_Folder = fileDialog.folder

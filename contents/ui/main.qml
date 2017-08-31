@@ -12,13 +12,11 @@ Item {
         loops: MediaPlayer.Infinite
         //source: wallpaper.configuration.Video
         playbackRate: wallpaper.configuration.Rate
-        onStatusChanged: {
-            shuffleList()
-        }
         playlist: Playlist {
             id: playlist
             playbackMode: Playlist.Loop
-            property var videoList: load(wallpaper.configuration.Video)
+            property var loaded: playlist.load(wallpaper.configuration.Video)
+            onLoaded: shuffleList()
         }
     }
 
@@ -27,21 +25,15 @@ Item {
         anchors.fill: parent
         source: mediaplayer
     }
-
+    
     function shuffleList() {
-        if ( !(i % 2 == 0)) {
-            j++
-        }
-        i++
-        if ( j > playlist.itemCount ) { 
-            j = 0
-            i = 0
-        }
-        if ( j == 1 ) {
-            // more random shuffling
-            for (var k = 0; k < Math.ceil(Math.random() * 10) ; k++) {
-                playlist.shuffle()
-            }
+        try {
+            mediaplayer.pause();
+            for (var i = Math.floor(Math.random() * playlist.itemCount); i; i--)
+                playlist.shuffle();
+            mediaplayer.play();
+        } catch (e) {
+            console.log("Error in shuffle", e);
         }
     }
 

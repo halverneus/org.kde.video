@@ -15,7 +15,7 @@ Item {
         playlist: Playlist {
             id: playlist
             playbackMode: Playlist.Loop
-            property var loaded: playlist.load(wallpaper.configuration.Video)
+            property var loaded: loadPlayList()
             onLoaded: shuffleList()
         }
     }
@@ -24,6 +24,18 @@ Item {
         fillMode: VideoOutput.PreserveAspectCrop
         anchors.fill: parent
         source: mediaplayer
+    }
+    
+    function loadPlayList() {
+        var url = wallpaper.configuration.Video;
+        if (url.split(".").pop() == "m3u") { // we have a playlist
+            playlist.load(url);
+            return true;
+        }
+        
+        // it's a single video
+        playlist.addItem(url);
+        return true;
     }
     
     function shuffleList() {

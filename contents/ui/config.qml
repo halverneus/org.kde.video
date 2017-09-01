@@ -31,6 +31,26 @@ ColumnLayout {
                     }
                 }
             }
+            
+        }
+    }
+    
+    
+    GroupBox {
+        Layout.fillWidth: true
+        TextField {
+            anchors.fill: parent
+            placeholderText: qsTr("Video file or playlist")
+            readOnly: true
+            text: cfg_Video.toString().replace(/^file:\/\//,'')
+            style: TextFieldStyle {
+                background: Rectangle {
+                    radius: 2
+                    implicitWidth: 100
+                    implicitHeight: 24
+                    color: "#eee"
+                }
+            }
         }
     }
     

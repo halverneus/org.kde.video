@@ -12,80 +12,99 @@ ColumnLayout {
     property bool cfg_Muted
     property double cfg_Rate
 
-    GroupBox {
-        title: "File picker"
+    /* Main layout with the whole content. Used to prevent vertical scaling */
+    ColumnLayout{
         Layout.fillWidth: true
-        GridLayout {
-            columns: 2
+        Layout.fillHeight: false
+        Layout.alignment: Qt.AlignTop
 
-            Rectangle {
-                width: 256
-                height: 144
-                color: "transparent"
-                PlasmaCore.IconItem {
-                    source: "org.kde.plasma.clipboard"
+        FileDialog {
+            id: fileDialog
+            title: "Pick a video file"
+            nameFilters: [ "Video files (*.mp4 *.mpg *.ogg *.mov *.webm *.flv *.mkv *.matroska *.avi *.m3u *.m3u8)", "All files (*)" ]
+            onAccepted: {
+                cfg_Video = fileDialog.fileUrls[0]
+                cfg_Folder = fileDialog.folder
+            }
+        }
+
+        // Video file selector 
+        RowLayout {    
+            GroupBox {
+                Layout.fillWidth: true
+                TextField {
                     anchors.fill: parent
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: {fileDialog.folder = cfg_Folder; fileDialog.open() }
+                    placeholderText: qsTr("Video file or playlist")
+                    readOnly: true
+                    text: cfg_Video.toString().replace(/^file:\/\//,'')
+                    style: TextFieldStyle {
+                        background: Rectangle {
+                            radius: 2
+                            implicitWidth: 100
+                            implicitHeight: 24
+                            color: "#eee"
+                        }
                     }
                 }
             }
 
-        }
-    }
+            GridLayout {
+                columns: 2
 
-
-    GroupBox {
-        Layout.fillWidth: true
-        TextField {
-            anchors.fill: parent
-            placeholderText: qsTr("Video file or playlist")
-            readOnly: true
-            text: cfg_Video.toString().replace(/^file:\/\//,'')
-            style: TextFieldStyle {
-                background: Rectangle {
-                    radius: 2
-                    implicitWidth: 100
-                    implicitHeight: 24
-                    color: "#eee"
+                Rectangle {
+                    // w:h = 1:1
+                    width: 48
+                    height: 48 
+                    color: "transparent"
+                    PlasmaCore.IconItem {
+                        source: "folder-open"
+                        anchors.fill: parent
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {fileDialog.folder = cfg_Folder; fileDialog.open() }
+                        }
+                    }
                 }
             }
-        }
-    }
+        } // file selector RowLayout
 
-    FileDialog {
-        id: fileDialog
-        title: "Pick a video file"
-        nameFilters: [ "Video files (*.mp4 *.mpg *.ogg *.mov *.webm *.flv *.mkv *.matroska *.avi *.m3u *.m3u8)", "All files (*)" ]
-        onAccepted: {
-            cfg_Video = fileDialog.fileUrls[0]
-            cfg_Folder = fileDialog.folder
-        }
-    }
+        // Settings layout ( audio + video params )
+        RowLayout {
+            property int layoutHeight: 500
 
-    GroupBox {
-        title: "Audio"
-        Layout.fillWidth: true
-        RadioButton {
-            text: "Muted"
-            checked: wallpaper.configuration.Muted
-            onCheckedChanged: {
-                if (checked)
-                    { cfg_Muted = true }
-                else
-                    { cfg_Muted = false }
+            Layout.fillWidth: true
+            Layout.alignment: Qt.AlignHCenter
+
+            GroupBox {
+                title: "Audio settings"
+                Layout.preferredWidth: parent.width / 2 // All items in the layout will have equal width 
+                Layout.preferredHeight: parent.height
+
+                CheckBox {
+                    text: "Muted"
+                    anchors.horizontalCenter: parent.horizontalCenter
+
+                    checked: wallpaper.configuration.Muted
+                    onCheckedChanged: {
+                        if (checked)
+                            { cfg_Muted = true }
+                        else
+                            { cfg_Muted = false }
+                    }
+                }
             }
-        }
-    }
 
-    GroupBox {
-        title: "Playback Rate"
-        Slider {
-            value: wallpaper.configuration.Rate
-            onValueChanged: {
-                cfg_Rate = value
+            GroupBox {
+                title: "Playback Rate"
+                Layout.preferredHeight: parent.height // Force all items to have the same height
+
+                Slider {
+                    value: wallpaper.configuration.Rate
+                    onValueChanged: {
+                        cfg_Rate = value
+                    }
+                }
             }
-        }
-    }
-}
+        } // settings RowLayout  
+    } // main ColumnLayout ( with all content )
+} // root ColumnLayout 

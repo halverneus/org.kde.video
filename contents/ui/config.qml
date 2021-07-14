@@ -98,7 +98,12 @@ ColumnLayout {
                 title: "Playback Rate"
                 Layout.preferredHeight: parent.height // Force all items to have the same height
 
+                // Setup playback-rate slider 
                 Slider {
+                    minimumValue: 0
+                    maximumValue: 1.0
+                    stepSize: 0.01
+                    
                     value: wallpaper.configuration.Rate
                     onValueChanged: {
                         cfg_Rate = value

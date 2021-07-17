@@ -26,6 +26,9 @@ Item {
             // Simple hack for video changing detection
             property var watchDog: wallpaper.configuration.Video
             onWatchDogChanged: loadPlaylist()
+
+            // Ensure that we will load playlist on startup
+            Component.onCompleted: loadPlaylist()
         }
     }
 
@@ -53,25 +56,6 @@ Item {
 
             player.play() // resume player
         }
-    }
-    
-    function loadPlayList() {
-        playlist.clear();
-
-        var url = wallpaper.configuration.Video; // load playlist
-        var extension = url.split(".").pop();
-
-        if (extension == "m3u" || extension == "m3u8") {
-            playlist.load(url);
-        } else {
-            playlist.addItem(url);
-        }
-
-        if (MediaPlayer.playbackState != MediaPlayer.PlayingState) {
-            mediaplayer.play();
-        }
-
-        return true;
     }
 }
 

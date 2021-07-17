@@ -14,14 +14,21 @@
       <label>Last folder used</label>
       <default></default>
     </entry>
-    <entry name="Muted" type="bool">
+    <entry name="Muted" type="Bool">
       <label>Audio muted</label>
       <default>false</default>
     </entry>
     <entry name="Rate" type="Double">
-      <label>Platback Rate</label>
-    <default>1.0</default>
+      <label>Playback Rate</label>
+      <default>1.0</default>
     </entry>
+
+    <!-- Playlist parameters -->
+    <entry name="Shuffle" type="Bool">
+      <label>Shuffle Playlist</label>
+      <default>false</default>
+    </entry>
+
   </group>
 
 </kcfg>

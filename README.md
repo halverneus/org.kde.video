@@ -21,7 +21,7 @@ Just install `qt-gstreamer` and `gst-libav`
 
 ## Playlists support
 
-<b> Media files musn't contans any spaces </b>
+<b> Media files musn't contan any spaces </b>
 
 ### Supported formats:
 - m3u

@@ -1,5 +1,5 @@
 import QtQuick 2.5
-import QtMultimedia 5.14
+import QtMultimedia 5.6
 import org.kde.plasma.core 2.0 as Plasmacore
 
 Item {
@@ -52,7 +52,7 @@ Item {
             }
 
             //console.log("Added " + url + "; Last video " + lastVideoUrl) // Debug message
-            lastVideoUrl = url // update last video
+            lastVideoUrl = url // update last video url
 
             player.play() // resume player
         }

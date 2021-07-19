@@ -18,3 +18,11 @@ Now just go into wallpaper or lock screen settings and chose "Video" instead of 
 <b> Using org.kde.video results in black screen, how can I solve? </b>
 
 Just install `qt-gstreamer` and `gst-libav`
+
+## Playlists support
+
+<b> Media files musn't contan any spaces </b>
+
+### Supported formats:
+- m3u
+- m3u8
